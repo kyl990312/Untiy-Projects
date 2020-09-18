@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Script.Player
+namespace Scripts.Player
 {
     public class PlayerController : MonoBehaviour
     {
@@ -14,13 +14,12 @@ namespace Script.Player
         public float movingSpeed = 1.0f;
 
         public float jumpForce = 1.0f;
-        public float acceleraion = 1.0f;
+        public float acceleraion = 3f;
         public float maxJumpingDistance = 10.0f;
         private float _maxJumpingHeight;
         private bool _isJumping = false;
-        private bool _isFalling = false;
+        private bool _isGrounded = false;
 
-        
         // Start is called before the first frame update
         void Start()
         {
@@ -28,10 +27,16 @@ namespace Script.Player
             _rigid = GetComponent<Rigidbody>();
         }
 
+        private void Update()
+        {
+            JumpInput();
+        }
+
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             Move();
+            Fall();    
             Jump();
         }
 
@@ -46,39 +51,42 @@ namespace Script.Player
 
         private void Jump()
         {
-            if (_isFalling)
-            {
-                _rigid.AddForce(acceleraion * Vector3.down,ForceMode.Acceleration);
-                return;
-            }
-            if (Input.GetKeyDown(KeyCode.Space) && !_isJumping)
-            {
-                _maxJumpingHeight = _transform.position.y + maxJumpingDistance;
-                _isJumping = true;
-                _rigid.AddForce(jumpForce * Vector3.up ,ForceMode.Impulse);
-                return;
-            }
-
-            if (!_isJumping)
-                return;
-
             if (_isJumping)
             {
                 if (_transform.position.y >= _maxJumpingHeight)
                 {
-                    _isFalling = true;
+                    _isJumping = false;
                     return;
                 }
-                _rigid.AddForce(Vector3.up*acceleraion,ForceMode.Acceleration);
+
+                _rigid.velocity = (Vector3.up * acceleraion);
             }
         }
 
+        private void Fall()
+        {
+            if (_isJumping)
+                return;
+            if (!_isGrounded)
+                _rigid.velocity = (acceleraion * Vector3.down);
+        }
+
+        private void JumpInput()
+        {
+            if (!_isGrounded)
+                return;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _maxJumpingHeight = _transform.position.y + maxJumpingDistance;
+                _isJumping = true;
+                _rigid.AddForce(jumpForce * Vector3.up ,ForceMode.Impulse);
+            }
+        }
         private void OnCollisionEnter(Collision other)
         {
-            if (_isJumping & other.gameObject.CompareTag("FLOOR"))
+            if (!_isGrounded & other.gameObject.CompareTag("FLOOR"))
             {
-                _isJumping = false;
-                _isFalling = false;
+                _isGrounded = true;
             }
         }
     }
