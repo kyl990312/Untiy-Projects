@@ -7,87 +7,78 @@ namespace Scripts.Player
 {
     public class PlayerController : MonoBehaviour
     {
-        private Rigidbody _rigid;
+        private Animator _animator;
+        // 캐릭터 애니매이션 파라미터 해쉬값
+        private readonly int _hashWalk = Animator.StringToHash("IsWalking");
+        private readonly int _hashJump = Animator.StringToHash("Jump");
+        
+        private Rigidbody _rigidbody;
         private Transform _transform;
 
-        public float rotationAngle = 30.0f;
-        public float movingSpeed = 1.0f;
+        [Header("Move Data")] 
+        public float speed = 1.0f;
+        private float _speed;
+        private int _backAngle = 0;
 
+        [Header("Jump Data")] 
         public float jumpForce = 1.0f;
-        public float acceleraion = 3f;
-        public float maxJumpingDistance = 10.0f;
-        private float _maxJumpingHeight;
-        private bool _isJumping = false;
-        private bool _isGrounded = false;
-
-        // Start is called before the first frame update
+        
         void Start()
         {
+            _animator = GetComponent<Animator>();
+            _rigidbody = GetComponent<Rigidbody>();
             _transform = GetComponent<Transform>();
-            _rigid = GetComponent<Rigidbody>();
+            
+            // 정해진 이동 속도에 deltaTime 적용
+            _speed = speed * Time.deltaTime;
         }
 
-        private void Update()
+        void Update()
         {
-            JumpInput();
-        }
-
-        // Update is called once per frame
-        void FixedUpdate()
-        {
-            Move();
-            Fall();    
             Jump();
+            Move();
         }
 
         private void Move()
         {
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
-            
-            _transform.Translate(0.0f,0.0f,v*Time.deltaTime*movingSpeed);
-            _transform.Rotate(Vector3.up,h*rotationAngle * Time.deltaTime);
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                // Rotation
+                _backAngle += 180;
+                transform.rotation = Quaternion.Euler(new Vector3(0, _backAngle, 0));
+            }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                // Move Animation
+                _animator.SetBool(_hashWalk, true);
+                
+                // Translate
+                _transform.Translate(Vector3.forward * _speed);
+                return;
+            }
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+               // Move Animation
+               _animator.SetBool(_hashWalk, true);
+                
+               // Translate
+               _transform.Translate(Vector3.forward * _speed);
+               return;
+            }
+                
+            // Idle Animation
+            _animator.SetBool(_hashWalk, false);
         }
 
         private void Jump()
         {
-            if (_isJumping)
-            {
-                if (_transform.position.y >= _maxJumpingHeight)
-                {
-                    _isJumping = false;
-                    return;
-                }
-
-                _rigid.velocity = (Vector3.up * acceleraion);
-            }
-        }
-
-        private void Fall()
-        {
-            if (_isJumping)
-                return;
-            if (!_isGrounded)
-                _rigid.velocity = (acceleraion * Vector3.down);
-        }
-
-        private void JumpInput()
-        {
-            if (!_isGrounded)
-                return;
+            // Jump Animation
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _maxJumpingHeight = _transform.position.y + maxJumpingDistance;
-                _isJumping = true;
-                _rigid.AddForce(jumpForce * Vector3.up ,ForceMode.Impulse);
+                _animator.SetBool(_hashJump, true);
+                return;
             }
-        }
-        private void OnCollisionEnter(Collision other)
-        {
-            if (!_isGrounded & other.gameObject.CompareTag("FLOOR"))
-            {
-                _isGrounded = true;
-            }
+            _animator.SetBool(_hashJump, false);
         }
     }
 }

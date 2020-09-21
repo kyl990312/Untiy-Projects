@@ -9,7 +9,9 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="Player" t="Include">
+            <e p="AttackMotion.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
+            <e p="WalkMotion.cs" t="Include" />
           </e>
           <e p="SimpleCameraController.cs" t="Include" />
         </e>
