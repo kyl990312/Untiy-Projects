@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Scripts.Player
 {
@@ -15,8 +16,6 @@ namespace Scripts.Player
         private Transform _transform;
 
         private CharacterController _characterController;
-
-
         
         [Header("Moving Data")] 
         public float jumpForce = 1.0f;
@@ -45,12 +44,6 @@ namespace Scripts.Player
         private void Move()
         {
             // move to back
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                // turn to back
-                _angleY += 180;
-                _back *= -1;
-            }
             if (Input.GetKey(KeyCode.S))
             {
                 _deltaY -= inputForce * Time.deltaTime;
@@ -85,9 +78,6 @@ namespace Scripts.Player
 
             // player Move
             _characterController.Move(Vector3.forward * _deltaY + Vector3.right *_deltaX);
-
-            // player Rotate
-            
         }
 
         private void Jump()
@@ -100,6 +90,7 @@ namespace Scripts.Player
             }
             _animator.SetBool(_hashJump, false);
         }
+
     }
 }
 

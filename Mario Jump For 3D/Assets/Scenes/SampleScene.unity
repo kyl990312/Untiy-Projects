@@ -273,7 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 1
   inputForce: 0.1
-  rotatingAngle: 100
+  rotatingAngle: 10
 --- !u!95 &1219022798
 Animator:
   serializedVersion: 3
