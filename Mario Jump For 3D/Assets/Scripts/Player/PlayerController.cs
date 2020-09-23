@@ -12,25 +12,28 @@ namespace Scripts.Player
         private readonly int _hashWalk = Animator.StringToHash("IsWalking");
         private readonly int _hashJump = Animator.StringToHash("Jump");
         
-        private Rigidbody _rigidbody;
         private Transform _transform;
 
-        [Header("Move Data")] 
-        public float speed = 1.0f;
-        private float _speed;
-        private int _backAngle = 0;
+        private CharacterController _characterController;
 
-        [Header("Jump Data")] 
+
+        
+        [Header("Moving Data")] 
         public float jumpForce = 1.0f;
+        private float _deltaY = 0f;            // associate with player vertical moving
+        private float _deltaX = 0f;
+        private float _angleY;            // associate with player rotation
+        public float inputForce = 0.1f;    // value that added at _deltaY
+        public float rotatingAngle = 0.1f;    // value that added at _angleY
+        private bool _moving;            // player moving state
+        private int _back = 1;
         
         void Start()
         {
             _animator = GetComponent<Animator>();
-            _rigidbody = GetComponent<Rigidbody>();
             _transform = GetComponent<Transform>();
+            _characterController = GetComponent<CharacterController>();
             
-            // 정해진 이동 속도에 deltaTime 적용
-            _speed = speed * Time.deltaTime;
         }
 
         void Update()
@@ -41,33 +44,50 @@ namespace Scripts.Player
 
         private void Move()
         {
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            // move to back
+            if (Input.GetKeyDown(KeyCode.S))
             {
-                // Rotation
-                _backAngle += 180;
-                transform.rotation = Quaternion.Euler(new Vector3(0, _backAngle, 0));
+                // turn to back
+                _angleY += 180;
+                _back *= -1;
             }
-            if (Input.GetKey(KeyCode.DownArrow))
+            if (Input.GetKey(KeyCode.S))
             {
-                // Move Animation
-                _animator.SetBool(_hashWalk, true);
-                
-                // Translate
-                _transform.Translate(Vector3.forward * _speed);
-                return;
+                _deltaY -= inputForce * Time.deltaTime;
+                _moving = true;
             }
-            if (Input.GetKey(KeyCode.UpArrow))
+            // move to forward
+            else if (Input.GetKey(KeyCode.W))
             {
-               // Move Animation
-               _animator.SetBool(_hashWalk, true);
-                
-               // Translate
-               _transform.Translate(Vector3.forward * _speed);
-               return;
+                _deltaY += inputForce* Time.deltaTime;
+                _moving = true;
             }
-                
-            // Idle Animation
-            _animator.SetBool(_hashWalk, false);
+            else
+            {
+                _moving = false;
+                _deltaY = 0f;
+            }
+            
+            if (Input.GetKey(KeyCode.A))
+            {
+                _deltaX -= inputForce * Time.deltaTime;
+                _moving = true;
+            }else if (Input.GetKey(KeyCode.D))
+            {
+                _deltaX += inputForce * Time.deltaTime;
+                _moving = true;
+            }else 
+                _deltaX = 0;
+            
+            // Set Walk Animation parameter
+            // if _moving is true, Walk animation will be played / if _moving is false, Idle animation will be played
+            _animator.SetBool(_hashWalk, _moving);            
+
+            // player Move
+            _characterController.Move(Vector3.forward * _deltaY + Vector3.right *_deltaX);
+
+            // player Rotate
+            
         }
 
         private void Jump()
