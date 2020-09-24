@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace Scripts.Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, PlayerInput.IPlayerActions
     {
+        // animation
         private Animator _animator;
         // 캐릭터 애니매이션 파라미터 해쉬값
         private readonly int _hashWalk = Animator.StringToHash("IsWalking");
@@ -16,18 +18,27 @@ namespace Scripts.Player
         private Transform _transform;
 
         private CharacterController _characterController;
-        
+
         [Header("Moving Data")] 
-        public float jumpForce = 1.0f;
-        private float _deltaY = 0f;            // associate with player vertical moving
-        private float _deltaX = 0f;
-        private float _angleY;            // associate with player rotation
-        public float inputForce = 0.1f;    // value that added at _deltaY
-        public float rotatingAngle = 0.1f;    // value that added at _angleY
-        private bool _moving;            // player moving state
-        private int _back = 1;
+        private PlayerInput _playerInputAction;
+
+        [SerializeField] private float speed;
+        private Vector2 _inputVector;
         
-        void Start()
+        // jump
+        private bool _isJumping;
+
+        // land
+        private bool _isGrounded = true;
+        [SerializeField]private Transform checkGroundedPos;
+        [SerializeField] private LayerMask groundLayer;
+        
+        // falling
+        [SerializeField] private float _fallingSpeed = 1.0f;
+        private float gravity = -9.81f;
+        
+        
+        void Awake()
         {
             _animator = GetComponent<Animator>();
             _transform = GetComponent<Transform>();
@@ -35,62 +46,67 @@ namespace Scripts.Player
             
         }
 
+        void OnEnable()
+        {
+            if(_playerInputAction == null) _playerInputAction = new PlayerInput();
+            _playerInputAction.Player.SetCallbacks(this);
+            _playerInputAction.Player.Enable();
+        }
+
+        private void OnDisable()
+        {
+            _playerInputAction.Player.Disable();
+        }
+
         void Update()
         {
+            Falling();
             Jump();
             Move();
         }
 
-        private void Move()
+        private void Falling()
         {
-            // move to back
-            if (Input.GetKey(KeyCode.S))
+            _isGrounded = Physics.CheckSphere(new Vector3(checkGroundedPos.position.x,checkGroundedPos.position.z,checkGroundedPos.position.y),0.1f,groundLayer);
+            if (_isGrounded)
             {
-                _deltaY -= inputForce * Time.deltaTime;
-                _moving = true;
-            }
-            // move to forward
-            else if (Input.GetKey(KeyCode.W))
-            {
-                _deltaY += inputForce* Time.deltaTime;
-                _moving = true;
+                _fallingSpeed = 0f;
+                _isJumping = false;
             }
             else
             {
-                _moving = false;
-                _deltaY = 0f;
+                _fallingSpeed += Time.deltaTime * gravity;
+                _characterController.Move(new Vector3(0, _fallingSpeed, 0));
             }
-            
-            if (Input.GetKey(KeyCode.A))
-            {
-                _deltaX -= inputForce * Time.deltaTime;
-                _moving = true;
-            }else if (Input.GetKey(KeyCode.D))
-            {
-                _deltaX += inputForce * Time.deltaTime;
-                _moving = true;
-            }else 
-                _deltaX = 0;
-            
-            // Set Walk Animation parameter
-            // if _moving is true, Walk animation will be played / if _moving is false, Idle animation will be played
-            _animator.SetBool(_hashWalk, _moving);            
-
-            // player Move
-            _characterController.Move(Vector3.forward * _deltaY + Vector3.right *_deltaX);
+        }    
+        private void Move()
+        {
+            if (_inputVector == Vector2.zero)
+                _animator.SetBool(_hashWalk, false);
+            var dir = (transform.forward * _inputVector.y + transform.right * _inputVector.x) *
+                      (Time.deltaTime * speed);
+            _characterController.Move(dir);
         }
 
         private void Jump()
         {
-            // Jump Animation
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _animator.SetBool(_hashJump, true);
-                return;
-            }
-            _animator.SetBool(_hashJump, false);
+            _animator.SetBool(_hashJump,_isJumping);
         }
 
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            _inputVector = context.ReadValue<Vector2>();
+            _animator.SetBool(_hashWalk, true);
+        }
+
+        public void OnJump(InputAction.CallbackContext context)
+        {
+                var value = context.ReadValue<float>();
+                if (value == 0)
+                    _isJumping = false;
+                else
+                    _isJumping = true;
+        }
     }
 }
 
