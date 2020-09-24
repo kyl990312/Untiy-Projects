@@ -23,12 +23,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Mario Jump For 3D/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Mario Jump For 3D/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Mario Jump For 3D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Mario Jump For 3D/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Model/Player Controller.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/Player Controller.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player Input.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player Input.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Player Input.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player Input.inputactions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Player Input.inputactions.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player Input.inputactions.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +38,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/../../GameEngine2/GameEngine2-2018182010KYR/20-09-22/Assets/Scenes/Input System/First Person/Scipts/FirstPersonMoveCtrl.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../3DTutorialKit/Assets/3DGamekitLite/Scripts/Game/Player/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -48,6 +46,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/SimpleCameraController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/AttackMotion.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/Player Input.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/FeetPosFollow.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
       </list>
     </option>
@@ -103,6 +102,7 @@
       <workItem from="1600784979641" duration="8460000" />
       <workItem from="1600867198450" duration="3797000" />
       <workItem from="1600943475933" duration="7924000" />
+      <workItem from="1600953858252" duration="8387000" />
     </task>
     <servers />
   </component>
@@ -131,10 +131,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="688" y="246" key="RiderGenerateDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1600948175688" />
-    <state x="93" y="93" width="1350" height="638" key="VCS.FileHistoryDialog" timestamp="1600443151315">
+    <state x="93" y="93" width="1350" height="638" key="VCS.FileHistoryDialog" timestamp="1600962418125">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="93" y="93" width="1350" height="638" key="VCS.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1600443151315" />
+    <state x="93" y="93" width="1350" height="638" key="VCS.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1600962418125" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1600950422609">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
