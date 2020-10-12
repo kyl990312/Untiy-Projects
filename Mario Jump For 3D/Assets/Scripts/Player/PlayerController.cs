@@ -38,7 +38,10 @@ namespace Scripts.Player
         // rotate
         private Vector2 _mouseInputVector;
         [SerializeField] private float sensitivity;
-        private float _rotationAngle = 0f;
+
+        // jump
+        private float _jumping = 0f;
+        private float _jumpFrame = 20.0f;
 
 
         void Awake()
@@ -105,6 +108,7 @@ namespace Scripts.Player
         {
             if (context.ReadValueAsButton())
             {
+                Debug.Log("JUMP");
                 if (_isGrounded)
                 {
                     // only when player's state is grounded, play animation
@@ -113,21 +117,24 @@ namespace Scripts.Player
                     return;
                 }
             }
-            _animator.SetBool(_hashJump, false);
-        }
 
-        public void OnAim(InputAction.CallbackContext context)
+            _animator.SetBool(_hashJump, false);
+            if (!_isGrounded)
+            {
+                _jumping += 1.0f;
+                if (_jumping >= 20.0f)
+                {
+                    Debug.Log("land");
+                    _isGrounded = true;
+                    _jumping = 0f;
+                }
+            }
+        }
+    
+
+        public void OnAim(InputAction.CallbackContext context) 
         {
             _mouseInputVector = context.ReadValue<Vector2>();
-        }
-
-        private void OnControllerColliderHit(ControllerColliderHit hit)
-        {
-            if (!_isGrounded && hit.gameObject.CompareTag("FLOOR"))
-            {
-                Debug.Log("Land");
-                _isGrounded = true;
-            }
         }
     }
 }

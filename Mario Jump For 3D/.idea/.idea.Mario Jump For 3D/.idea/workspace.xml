@@ -20,14 +20,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="33da5835-36f9-4c7f-9e12-0632ee781904" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Mario Jump For 3D/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Mario Jump For 3D/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../A Stranger/Library/ArtifactDB" beforeDir="false" afterPath="$PROJECT_DIR$/../A Stranger/Library/ArtifactDB" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../A Stranger/Library/Artifacts/13/13948fe84f4dd99556c6551f6620c2c6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../A Stranger/Library/Artifacts/22/22c4bf87023156bcd7c91b031eccdc5b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../A Stranger/Library/Artifacts/c2/c2f5683ca9c081269ee8238cd7dacc30" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../A Stranger/Library/Artifacts/ce/ce14ca30962ff6b11acbadf6bb984702" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../A Stranger/Library/Artifacts/f9/f910bcd8915e964f301b687ba56bd93d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../A Stranger/Library/CurrentLayout-default.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../A Stranger/Library/CurrentLayout-default.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../A Stranger/Library/LastSceneManagerSetup.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../A Stranger/Library/LastSceneManagerSetup.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../A Stranger/Library/PackageManager/ProjectCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../A Stranger/Library/PackageManager/ProjectCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../A Stranger/Library/SceneVisibilityState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../A Stranger/Library/SceneVisibilityState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../A Stranger/Library/ShaderCache/EditorEncounteredVariants" beforeDir="false" afterPath="$PROJECT_DIR$/../A Stranger/Library/ShaderCache/EditorEncounteredVariants" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../A Stranger/Library/SourceAssetDB" beforeDir="false" afterPath="$PROJECT_DIR$/../A Stranger/Library/SourceAssetDB" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../A Stranger/Library/Style.catalog" beforeDir="false" afterPath="$PROJECT_DIR$/../A Stranger/Library/Style.catalog" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Mario Jump For 3D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Mario Jump For 3D/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Model/Player Controller.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/Player Controller.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Player Input.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player Input.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Player Input.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player Input.inputactions" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,6 +112,7 @@
       <workItem from="1600867198450" duration="3797000" />
       <workItem from="1600943475933" duration="7924000" />
       <workItem from="1600953858252" duration="8387000" />
+      <workItem from="1602513687093" duration="4472000" />
     </task>
     <servers />
   </component>
