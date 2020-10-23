@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Player Input.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Player Controll/Player/Player Input.inputactions'
 
 using System;
 using System.Collections;
@@ -36,7 +36,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""jump"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""b4ea596e-5512-47ee-b631-0d8b6155ce10"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",

@@ -20,26 +20,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28d999cb-7028-4c3a-81d9-322624162702" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Player Controll.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../../Player Controll.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Env/Floor Objects.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Env/Floor Objects.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Player.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../Player.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Player.dir/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Player.dir/.idea/contentModel.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Player.dir/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Player.dir/.idea/indexLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Player.dir/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Player.dir/.idea/projectSettingsUpdater.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Player.dir/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Player.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Player.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Player.dir/riderModule.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../README.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Scenes/Character_Controll.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Scenes/Character_controll.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Scenes/Sample.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../../Scenes/Sample.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Library/ArtifactDB" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Library/ArtifactDB" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Library/EditorInstance.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Library/Artifacts/6a/6a0d00558c4f8713556ecf1bd1027c6e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Library/Artifacts/a3/a312f65ba34d31b8a57793ff80eb950a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Library/Artifacts/b4/b4d4d371bdbabce27d044dadffa88090" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Library/Artifacts/ba/ba087b0727326b3ed46999fc509627bb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Library/Artifacts/d2/d2256a9e6834cb81bb8c839758e9c0fa" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Library/SceneVisibilityState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Library/SceneVisibilityState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Library/ShaderCache/EditorEncounteredVariants" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Library/ShaderCache/EditorEncounteredVariants" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Library/SourceAssetDB" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Library/SourceAssetDB" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Library/StateCache/SceneView/8c/8cd7c613bf844de3b80696e27a479d5e.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Library/StateCache/SceneView/8c/8cd7c613bf844de3b80696e27a479d5e.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Library/shadercompiler-UnityShaderCompiler.exe0.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Library/shadercompiler-UnityShaderCompiler.exe0.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Temp/UnityLockfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Temp/UnityTempFile-0848cae64f275f94b984f8b494e000ad" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Temp/UnityTempFile-59717de8ce6bf03408e42b010b9a3a5b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Temp/UnityTempFile-7c372d8562802f0429acd6bcd4393031" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Temp/UnityTempFile-83d90183f91a4194e8ffc8b552716459" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Temp/UnityTempFile-852833ca22cb85541b7373b741cff053" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Temp/UnityTempFile-9aaf16cd884da3e478d6478f3561392a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Temp/UnityTempFile-b2044737539d2af40b4b201494fefadd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Temp/UnityTempFile-cbaf502f5eb59ea4d8fe651b4c389299" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Temp/UnityTempFile-db4b487c077b86741bf48824f83a92d2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Temp/UnityTempFile-dc62f5d7ecf179444948d3cee188eee6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Temp/UnityTempFile-e62453ad9a4a9c749a1e29d5ffbe8fce" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Temp/UnityTempFile-f26d535e889fea448a55512e4ad2d1b8" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Temp/UnityTempFile-fb20d9f7424f8754ab52195d489cf126" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Temp/UnityTempFile-fda2253b5c8179d4ebd9f924bdf70bee" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Library/shadercompiler-UnityShaderCompiler.exe1.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Library/shadercompiler-UnityShaderCompiler.exe1.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Library/shadercompiler-UnityShaderCompiler.exe2.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Library/shadercompiler-UnityShaderCompiler.exe2.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Mario Jump For 3D/Assets/Player Controll/Player/Player Input.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Mario Jump For 3D/Assets/Player Controll/Player/Player Input.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Mario Jump For 3D/Assets/Player Controll/Player/Player Input.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Mario Jump For 3D/Assets/Player Controll/Player/Player Input.inputactions" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +64,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../../TutorialInfo/Scripts/Editor/ReadmeEditor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Mario Jump For 3D/Assets/Player Controll/Player/Player Input.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Player Input.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1jI6Vg0gcsprGppWde2d8xcQbsQ" />
@@ -78,7 +92,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1603479286022</updated>
-      <workItem from="1603479287893" duration="595000" />
+      <workItem from="1603479287893" duration="1783000" />
     </task>
     <servers />
   </component>
