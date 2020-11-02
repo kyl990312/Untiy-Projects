@@ -124,16 +124,21 @@ namespace Player.Scripts
         private void FixedUpdate()
         {
             // Check Falling
-            if(!Physics.CheckSphere(new Vector3(transform.position.x,transform.position.y + GroundedCheckOffset,transform.position.z),GroundedCheckRadius,groundLayer))
-                _state = PlayerState.Fall;
-            else
+            if (!_jumping)
             {
-                fallingSpeed = 1f;
-                if(_inputVector ==  Vector2.zero)
-                    _state = PlayerState.Idle;
+                if (!Physics.CheckSphere(
+                    new Vector3(transform.position.x, transform.position.y + GroundedCheckOffset, transform.position.z),
+                    GroundedCheckRadius, groundLayer))
+                    _state = PlayerState.Fall;
                 else
                 {
-                    _state = PlayerState.Run;
+                    fallingSpeed = 1f;
+                    if (_inputVector == Vector2.zero)
+                        _state = PlayerState.Idle;
+                    else
+                    {
+                        _state = PlayerState.Run;
+                    }
                 }
             }
         }
