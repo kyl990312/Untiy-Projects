@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using TMPro;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Debug = UnityEngine.Debug;
@@ -18,9 +20,11 @@ namespace Player.Scripts
         private readonly int _hashLeft = Animator.StringToHash("Left");
         private readonly int _hashRight = Animator.StringToHash("Right");
         private readonly int _hashJump = Animator.StringToHash("Jump");
+        private readonly int _hashDash = Animator.StringToHash("Dash");
+        
         
 
-        private CharacterController _characterController;
+       // private CharacterController _characterController;
         private Rigidbody _rigidbody;
 
         [Header("Moving Data")]
@@ -28,15 +32,9 @@ namespace Player.Scripts
         [SerializeField] private float speed;
 
         // player State
-       [SerializeField]private PlayerState _state = PlayerState.Idle;
-       
-        
-        // falling
-        [SerializeField] private float fallingSpeed = 1.0f;
+        [SerializeField]private PlayerState _state = PlayerState.Idle;
 
-        private const float _gravity = -9.81f;
-
-        // rotate
+       // rotate
         private Vector2 _mouseInputVector;
         [SerializeField] private Transform cameraBody;
         [SerializeField] private Transform cameraLookat;
@@ -44,10 +42,25 @@ namespace Player.Scripts
         [SerializeField] private float sensitivityX;
         [SerializeField] private float sensitivityY;
 
+        // Jump
+        private bool _isGrounded = false;
+
+        // Dash
+        private int _idleTag;
+        
+        // Skill
+        private bool _selectMode;
+        
+        public bool IsGrounded
+        {
+            get => _isGrounded;
+            set => _isGrounded = value;
+        }
+
         void Awake()
         {
             _animator = GetComponent<Animator>();
-            _characterController = GetComponent<CharacterController>();
+           // _characterController = GetComponent<CharacterController>();
             _rigidbody = GetComponent<Rigidbody>();
         }
 
@@ -65,9 +78,12 @@ namespace Player.Scripts
         {
             InputKey();
             Rotate();
-            //CheckFalling();
+            
+        }
 
-           if (_state == PlayerState.Dead)
+        private void FixedUpdate()
+        {
+            if (_state == PlayerState.Dead)
             {
                 // Dead Animation
                 return;
@@ -76,6 +92,7 @@ namespace Player.Scripts
             if (_state == PlayerState.Jump)
             {
                 Jump();
+                Debug.Log("JumpState");
             }
             if (_state == PlayerState.Run)
             {
@@ -96,7 +113,7 @@ namespace Player.Scripts
             }
             else if (_state == PlayerState.Idle)
             {
-                
+                _idleTag = _animator.GetCurrentAnimatorStateInfo(0).GetHashCode();
             }
         }
 
@@ -105,8 +122,26 @@ namespace Player.Scripts
             // Jump
             if (Input.GetButtonDown("Jump"))
             {
-                //_state = PlayerState.Jump;
-                _animator.SetBool(_hashJump, true);
+                _state = PlayerState.Jump;
+                Debug.Log("JUMP");
+                //if(_isGrounded)
+                    _animator.SetTrigger(_hashJump);
+            }
+            
+            // Dash
+            if (Input.GetButtonDown("Dash"))
+            {
+                _state = PlayerState.Dash;
+                if (_state != PlayerState.Dash)
+                {
+                    _animator.SetTrigger(_hashDash);
+                }
+            }
+            
+            // Select
+            if (Input.GetButton("Left Click"))
+            {
+                _selectMode = true;
             }
             
             // Run
@@ -169,17 +204,22 @@ namespace Player.Scripts
         }
         private void Falling()
         {
-            if (_state == PlayerState.Jump) return;
-                if (_characterController.isGrounded)
-                _state = PlayerState.Idle;
+         
         }    
         private void Run()
         {
             // animation selec
-            var dir = (transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical")) * (Time.deltaTime * speed);
+            //var dir = (transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical")) * (Time.deltaTime * speed);
+            var dir = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
             if (dir == Vector3.zero)
                 _state = PlayerState.Idle;
-            _characterController.Move(dir);
+            //_characterController.Move(dir);
+            transform.Translate(dir * (speed * Time.deltaTime));
+        }
+
+        void Dash()
+        {
+            
         }
 
         void Jump()

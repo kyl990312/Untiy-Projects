@@ -16,12 +16,8 @@ namespace Player.Scripts
     
         private void OnCollisionEnter(Collision other)
         {
-            /*if (!_player.Jumping) return;
-            // Grounded Check
-            if(other.gameObject.CompareTag("FLOOR"))
-            {
-                _player.Jumping = false;
-            }*/
+            Debug.Log("Grounded");
+            _player.IsGrounded = true;
         }
     }
 }

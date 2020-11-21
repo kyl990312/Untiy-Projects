@@ -405,7 +405,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3.5
   _state: 0
-  fallingSpeed: 1
   cameraBody: {fileID: 0}
   cameraLookat: {fileID: 0}
   minY: 0
@@ -843,7 +842,7 @@ Transform:
   m_GameObject: {fileID: 3322849785295569716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.16, y: 0.16, z: 0.16}
+  m_LocalScale: {x: 0.16, y: 0.16, z: 0.1545728}
   m_Children:
   - {fileID: 3000877884384570552}
   - {fileID: 2806501271063934058}
@@ -862,7 +861,7 @@ CharacterController:
   m_GameObject: {fileID: 3322849785295569716}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 1.6
   m_Radius: 1
@@ -880,7 +879,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3322849785295569716}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 050464b67e3dd2f4cb021034b62fc007, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 5faa14f36e32f894d8ffdb87a72cdace, type: 3}
   m_Controller: {fileID: 9100000, guid: b52f713ca78a79b4aae32d1daf04e0e0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -902,9 +901,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f42ffaa4ccb7d4d8310ddaa735f945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 5.55
   _state: 0
-  fallingSpeed: 1
   cameraBody: {fileID: 1690832388}
   cameraLookat: {fileID: 1800660369}
   minY: 3
@@ -921,11 +919,11 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!1 &3809144341493738536
 GameObject:
@@ -1319,7 +1317,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5004943715445364037}
   - component: {fileID: 2511965806805106195}
-  - component: {fileID: 1242495081}
   - component: {fileID: 1242495079}
   m_Layer: 9
   m_Name: Bip001 R Foot
@@ -1357,22 +1354,6 @@ CapsuleCollider:
   m_Height: 1.8824161
   m_Direction: 0
   m_Center: {x: -0.6465124, y: 0.21574739, z: -0.028576847}
---- !u!54 &1242495081
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5097732384966958514}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 122
-  m_CollisionDetection: 0
 --- !u!114 &1242495079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2555,7 +2536,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1302461308688285147}
   - component: {fileID: 2511965806805106206}
-  - component: {fileID: 1874783552}
   - component: {fileID: 1874783550}
   m_Layer: 9
   m_Name: Bip001 L Foot
@@ -2593,22 +2573,6 @@ CapsuleCollider:
   m_Height: 1.8824162
   m_Direction: 0
   m_Center: {x: -0.5548064, y: 0.33912435, z: 0.016788056}
---- !u!54 &1874783552
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9137719167676132397}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 122
-  m_CollisionDetection: 0
 --- !u!114 &1874783550
 MonoBehaviour:
   m_ObjectHideFlags: 0
