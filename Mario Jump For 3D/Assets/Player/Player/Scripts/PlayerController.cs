@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net.Http.Headers;
 using TMPro;
 using UnityEditorInternal;
 using UnityEngine;
@@ -24,7 +25,7 @@ namespace Player.Scripts
         
         
 
-       // private CharacterController _characterController;
+        private CharacterController _characterController;
         private Rigidbody _rigidbody;
 
         [Header("Moving Data")]
@@ -50,7 +51,20 @@ namespace Player.Scripts
         
         // Skill
         private bool _selectMode;
-        
+
+        public bool SelectMode
+        {
+            get
+            {
+                return _selectMode;
+                
+            }
+            set
+            {
+                _selectMode = SelectMode;
+            }
+        }
+
         public bool IsGrounded
         {
             get => _isGrounded;
@@ -60,7 +74,7 @@ namespace Player.Scripts
         void Awake()
         {
             _animator = GetComponent<Animator>();
-           // _characterController = GetComponent<CharacterController>();
+            _characterController = GetComponent<CharacterController>();
             _rigidbody = GetComponent<Rigidbody>();
         }
 
@@ -100,8 +114,7 @@ namespace Player.Scripts
             }
             else if (_state == PlayerState.Dash)
             {
-                
-                return;
+                Dash();
             }
             else if (_state == PlayerState.Fall)
             {
@@ -113,7 +126,7 @@ namespace Player.Scripts
             }
             else if (_state == PlayerState.Idle)
             {
-                _idleTag = _animator.GetCurrentAnimatorStateInfo(0).GetHashCode();
+                
             }
         }
 
@@ -132,18 +145,25 @@ namespace Player.Scripts
             if (Input.GetButtonDown("Dash"))
             {
                 _state = PlayerState.Dash;
+                _rigidbody.useGravity = false;
+                Debug.Log("Dash");
+                _animator.SetTrigger(_hashDash);
                 if (_state != PlayerState.Dash)
                 {
-                    _animator.SetTrigger(_hashDash);
+                   
                 }
             }
             
             // Select
-            if (Input.GetButton("Left Click"))
+            if (Input.GetButtonDown("Right Click"))
             {
                 _selectMode = true;
             }
+
+            if (Input.GetButtonUp("Right Click"))
+                _selectMode = false;
             
+
             // Run
             if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
             {
@@ -190,13 +210,6 @@ namespace Player.Scripts
                 _animator.SetBool(_hashRight, false);
             }
         }
-        
-
-        private void LateUpdate()
-        {
-            if(_animator.GetBool(_hashJump))
-                _animator.SetBool(_hashJump, false);
-        }
 
         void CheckFalling()
         {
@@ -209,12 +222,12 @@ namespace Player.Scripts
         private void Run()
         {
             // animation selec
-            //var dir = (transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical")) * (Time.deltaTime * speed);
-            var dir = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+            var dir = (transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical")) * (Time.deltaTime * speed);
+            //var dir = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
             if (dir == Vector3.zero)
                 _state = PlayerState.Idle;
-            //_characterController.Move(dir);
-            transform.Translate(dir * (speed * Time.deltaTime));
+            _characterController.Move(dir);
+            //transform.Translate(dir * (speed * Time.deltaTime));
         }
 
         void Dash()
