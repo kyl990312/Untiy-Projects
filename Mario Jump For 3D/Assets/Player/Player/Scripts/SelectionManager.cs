@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Player.Scripts;
 using UnityEngine;
@@ -15,13 +16,24 @@ public class SelectionManager : MonoBehaviour
     private Material defaultMaterial;
     [SerializeField] private Material selectedMaterial;
     [SerializeField] private Material highlightMaterial;
+    [SerializeField] private Material defaultSelectedMaterial;
 
     RaycastHit hit;
     private Transform _selection;
-    private GameObject _selectedObject;            // 중력스킬을 적용할 오브젝트
+    private GameObject _selectedObject;  // 중력스킬을 적용할 오브젝트
+    private AdaptGravity gravityObject;
+    private Color _defaultColor;
+
 
     private SelecMode _selecMode = SelecMode.NonSelecting;
     [SerializeField] private PlayerController player;
+
+    private void Awake()
+    {
+        _defaultColor = defaultSelectedMaterial.GetColor("_EmissionColor");
+        selectedMaterial.SetColor("_EmissionColor",_defaultColor);
+
+    }
 
     private void Update()
     {
@@ -34,6 +46,7 @@ public class SelectionManager : MonoBehaviour
 
         if (_selecMode == SelecMode.NonSelecting)
         {
+            
             if (player.SelectMode)
                 _selecMode = SelecMode.Selecting;
 
@@ -62,6 +75,7 @@ public class SelectionManager : MonoBehaviour
                         Debug.Log("Select");
                         _selectedObject = _selection.gameObject;
                         _selectedObject.GetComponent<Renderer>().material = selectedMaterial;
+                        gravityObject = _selectedObject.GetComponent<AdaptGravity>();
                         player.SelectMode = false;
                         _selection = null;
                         _selecMode = SelecMode.Selected;
@@ -76,11 +90,38 @@ public class SelectionManager : MonoBehaviour
                 _selectedObject.GetComponent<Renderer>().material = defaultMaterial;
                 _selectedObject = null;
                 _selecMode = SelecMode.NonSelecting;
-
+                gravityObject.Selected = false;
             }
+            
             // 마우스 휠 스크롤에 따른 중력 & UI 조정
-            
-            
+            var axis = Input.GetAxis("Mouse ScrollWheel");
+            if (axis != 0f)
+            {
+                gravityObject.Selected = true;
+                gravityObject.AddGravity(axis);
+            }
+
+            // UI
+            var color = selectedMaterial.GetColor("_EmissionColor");
+            if (axis > 0)
+            {
+                // r -> b
+                color.r -= 0.1f;
+                color.g -= 0.1f;
+                color.b += 0.1f;
+            }else if (axis < 0)
+            {
+                // b -> r
+                color.r += 0.1f;
+                color.g -= 0.1f;
+                color.b -= 0.1f;
+            }
+
+            if (gravityObject.AddedGravity == 0f)
+            {
+                color = _defaultColor;
+            }
+            selectedMaterial.SetColor("_EmissionColor",color);
         }
     }
 

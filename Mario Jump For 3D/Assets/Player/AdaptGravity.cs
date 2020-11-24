@@ -1,35 +1,89 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
+using Object = System.Object;
 
 public class AdaptGravity : MonoBehaviour
 {
    private Rigidbody _rigidbody;
 
-   public float addedGravity;
-   private float velocity;
-   private bool _collision;
+   private float _addedGravity;
+   [SerializeField] private float gravity = 9.8f;
+
+   public float AddedGravity
+   {
+      get => _addedGravity;
+   }
+   private float _prevAxis = 0f;
+   private bool _selected;
+
+   private float _sec;
+   public float maxSec = 15f;
+   public bool Selected
+   {
+      set => _selected = value;
+   }
+   private float _velocity;
+   private float _defaultY;
+   private float _minY;
    void Awake()
    {
       _rigidbody = GetComponent<Rigidbody>();
+      _defaultY = transform.position.y;
+      Transform[] transforms = GetComponentsInChildren<Transform>();
+      if (transforms[1] != null)
+      {
+         _minY = transforms[1].position.y;
+         Debug.Log(_minY); 
+         GameObject.Destroy(transforms[1].gameObject);
+      }
    }
 
    void FixedUpdate()
    {
-      if (!_collision){
-         float acc = -(9.8f + addedGravity) / _rigidbody.mass;
-         velocity += acc;
-         transform.position += Vector3.up * (velocity * Time.deltaTime);
-      }
+     
+         float acc = -(gravity + _addedGravity) * _rigidbody.mass;
+         _velocity += acc * Time.deltaTime;
+         Debug.Log("acc: " + acc + " vel: " + _velocity);
+         transform.position += Vector3.up * (_velocity * Time.deltaTime);
+         if (_minY >= transform.position.y)
+         {
+            transform.position = new Vector3(transform.position.x, _minY, transform.position.z);
+            if (_addedGravity > 0)
+               _addedGravity = 0;
+            _velocity = 0;
+         }
+
+         if (!_selected)
+         {
+            _sec += Time.deltaTime;
+         }
+
+         if (_sec >= maxSec)
+         {
+            _sec = 0f;
+            _addedGravity = 0f;
+            _velocity = 0f;
+         }
+      
    }
 
-   private void OnCollisionStay(Collision other)
+   public void AddGravity(float axis)
    {
-      if (other.gameObject.CompareTag("FLOOR"))
+      if (_prevAxis * axis < 0)
       {
-         _collision = true;
+         _addedGravity = 0f;
+         _velocity = 0f;
       }
+
+      if(axis<0)
+         _addedGravity += _rigidbody.mass / 10;
+      else if (axis > 0)
+         _addedGravity -= _rigidbody.mass / 10;
+
+      _prevAxis = axis;
    }
 }
 

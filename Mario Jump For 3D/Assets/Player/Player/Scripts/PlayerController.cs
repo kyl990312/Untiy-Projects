@@ -38,7 +38,7 @@ namespace Player.Scripts
        // rotate
         private Vector2 _mouseInputVector;
         [SerializeField] private Transform cameraBody;
-        [SerializeField] private Transform cameraLookat;
+        //[SerializeField] private Transform cameraLookat;
         public float minY, maxY;
         [SerializeField] private float sensitivityX;
         [SerializeField] private float sensitivityY;
@@ -246,7 +246,7 @@ namespace Player.Scripts
             transform.Rotate(Vector3.up* (rot*Time.deltaTime*sensitivityX));
             var camY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivityY;
             cameraBody.position = new Vector3(cameraBody.position.x, Mathf.Clamp(cameraBody.position.y - camY ,
-                cameraLookat.position.y - minY, cameraLookat.position.y + maxY),cameraBody.position.z);
+                transform.position.y - minY + 1.85f, transform.position.y + maxY+ 1.85f),cameraBody.position.z);
         }
     }
 }
