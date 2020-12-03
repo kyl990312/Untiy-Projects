@@ -91,6 +91,7 @@ public class SelectionManager : MonoBehaviour
                 _selectedObject = null;
                 _selecMode = SelecMode.NonSelecting;
                 gravityObject.Selected = false;
+                gravityObject.AdaptChanges();
             }
             
             // 마우스 휠 스크롤에 따른 중력 & UI 조정

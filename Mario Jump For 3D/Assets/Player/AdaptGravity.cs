@@ -10,6 +10,7 @@ public class AdaptGravity : MonoBehaviour
    private Rigidbody _rigidbody;
 
    private float _addedGravity;
+   private float _tempAddedGravity;
    [SerializeField] private float gravity = 9.8f;
 
    public float AddedGravity
@@ -18,13 +19,14 @@ public class AdaptGravity : MonoBehaviour
    }
    private float _prevAxis = 0f;
    private bool _selected;
-
-   private float _sec;
-   public float maxSec = 15f;
    public bool Selected
    {
       set => _selected = value;
    }
+   
+   private float _sec;
+   public float maxSec = 15f;
+
    private float _velocity;
    private float _defaultY;
    private float _minY;
@@ -74,16 +76,24 @@ public class AdaptGravity : MonoBehaviour
    {
       if (_prevAxis * axis < 0)
       {
-         _addedGravity = 0f;
+         _tempAddedGravity = 0f;
          _velocity = 0f;
       }
 
       if(axis<0)
-         _addedGravity += _rigidbody.mass / 10;
+         _tempAddedGravity += _rigidbody.mass / 10;
       else if (axis > 0)
-         _addedGravity -= _rigidbody.mass / 10;
+         _tempAddedGravity -= _rigidbody.mass / 10;
 
       _prevAxis = axis;
    }
+   
+   public void AdaptChanges()
+   {
+      _addedGravity = _tempAddedGravity;
+      _tempAddedGravity = 0f;
+   }
 }
+
+
 
