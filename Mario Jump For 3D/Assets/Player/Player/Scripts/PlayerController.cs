@@ -22,6 +22,8 @@ namespace Player.Scripts
         private readonly int _hashRight = Animator.StringToHash("Right");
         private readonly int _hashJump = Animator.StringToHash("Jump");
         private readonly int _hashDash = Animator.StringToHash("Dash");
+        private readonly int _hashSkillStart = Animator.StringToHash("SkillStart");
+        private readonly int _hashSkillEnd = Animator.StringToHash("SkillEnd");
         
         
 
@@ -37,7 +39,8 @@ namespace Player.Scripts
 
        // rotate
         private Vector2 _mouseInputVector;
-        [SerializeField] private Transform cameraBody;
+        [SerializeField] private Transform thirdCamFollow;
+        [SerializeField] private Transform firstCamLooAt;
         //[SerializeField] private Transform cameraLookat;
         public float minY, maxY;
         [SerializeField] private float sensitivityX;
@@ -120,7 +123,7 @@ namespace Player.Scripts
             {
                 Falling();
             }
-            else if (_state == PlayerState.Attack)
+            else if (_state == PlayerState.Skill)
             {
                 
             }
@@ -132,6 +135,32 @@ namespace Player.Scripts
 
         void InputKey()
         {
+            // Select
+            if (Input.GetButtonDown("Right Click"))
+            {
+                if (_state == PlayerState.Idle)
+                {
+                    _animator.SetTrigger(_hashSkillStart);
+                    _selectMode = true;
+                    _state = PlayerState.Skill;
+                }
+            }
+
+
+            if (Input.GetButtonUp("Right Click"))
+            {
+                if (_state == PlayerState.Skill)
+                {
+                    _animator.SetTrigger(_hashSkillEnd);
+                    _selectMode = false;
+                    _state = PlayerState.Idle;
+                }
+            }
+
+
+            if (_state == PlayerState.Skill)
+                return;
+
             // Jump
             if (Input.GetButtonDown("Jump"))
             {
@@ -152,17 +181,7 @@ namespace Player.Scripts
                 {
                    
                 }
-            }
-            
-            // Select
-            if (Input.GetButtonDown("Right Click"))
-            {
-                _selectMode = true;
-            }
-
-            if (Input.GetButtonUp("Right Click"))
-                _selectMode = false;
-            
+            }                        
 
             // Run
             if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
@@ -244,9 +263,18 @@ namespace Player.Scripts
         {
             var rot = Input.GetAxis("Mouse X");
             transform.Rotate(Vector3.up* (rot*Time.deltaTime*sensitivityX));
+
             var camY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivityY;
-            cameraBody.position = new Vector3(cameraBody.position.x, Mathf.Clamp(cameraBody.position.y - camY ,
-                transform.position.y - minY + 1.85f, transform.position.y + maxY+ 1.85f),cameraBody.position.z);
+            if (_state == PlayerState.Skill)
+            {
+                firstCamLooAt.position = new Vector3(thirdCamFollow.position.x, Mathf.Clamp(firstCamLooAt.position.y + camY,
+                    transform.position.y - minY + 1.85f, transform.position.y + maxY + 1.85f), firstCamLooAt.position.z);
+            }
+            else
+            {
+                thirdCamFollow.position = new Vector3(thirdCamFollow.position.x, Mathf.Clamp(thirdCamFollow.position.y - camY,
+                    transform.position.y - minY + 1.85f, transform.position.y + maxY + 1.85f), thirdCamFollow.position.z);
+            }
         }
     }
 }

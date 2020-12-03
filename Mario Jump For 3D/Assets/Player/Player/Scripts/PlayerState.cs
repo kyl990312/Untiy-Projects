@@ -10,7 +10,7 @@ namespace Player.Scripts
         Run,
         Dash,
         Jump,
-        Attack,
+        Skill,
         Fall,
         Dead
     }

@@ -12,10 +12,11 @@ public class AdaptGravity : MonoBehaviour
    private float _addedGravity;
    private float _tempAddedGravity;
    [SerializeField] private float gravity = 9.8f;
+    [SerializeField] private float power = 0.1f;
 
-   public float AddedGravity
-   {
-      get => _addedGravity;
+    public float tempAddedGravity
+    {
+      get => _tempAddedGravity;
    }
    private float _prevAxis = 0f;
    private bool _selected;
@@ -48,7 +49,7 @@ public class AdaptGravity : MonoBehaviour
      
          float acc = -(gravity + _addedGravity) * _rigidbody.mass;
          _velocity += acc * Time.deltaTime;
-         Debug.Log("acc: " + acc + " vel: " + _velocity);
+
          transform.position += Vector3.up * (_velocity * Time.deltaTime);
          if (_minY >= transform.position.y)
          {
@@ -58,22 +59,22 @@ public class AdaptGravity : MonoBehaviour
             _velocity = 0;
          }
 
-         if (!_selected)
+        if (_addedGravity != 0f)
          {
             _sec += Time.deltaTime;
-         }
+            if (_sec >= maxSec)
+            {
+                _sec = 0f;
+                _addedGravity = 0f;
+                _velocity = 0f;
+            }
 
-         if (_sec >= maxSec)
-         {
-            _sec = 0f;
-            _addedGravity = 0f;
-            _velocity = 0f;
-         }
-      
-   }
+        }
+    }
 
    public void AddGravity(float axis)
    {
+        
       if (_prevAxis * axis < 0)
       {
          _tempAddedGravity = 0f;
@@ -81,9 +82,9 @@ public class AdaptGravity : MonoBehaviour
       }
 
       if(axis<0)
-         _tempAddedGravity += _rigidbody.mass / 10;
+         _tempAddedGravity += _rigidbody.mass * power;
       else if (axis > 0)
-         _tempAddedGravity -= _rigidbody.mass / 10;
+         _tempAddedGravity -= _rigidbody.mass * power;
 
       _prevAxis = axis;
    }

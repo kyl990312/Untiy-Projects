@@ -71,8 +71,7 @@ public class SelectionManager : MonoBehaviour
 
                     _selection = selection;
                     if (Input.GetButtonDown("Left Click"))
-                    {
-                        Debug.Log("Select");
+                    { 
                         _selectedObject = _selection.gameObject;
                         _selectedObject.GetComponent<Renderer>().material = selectedMaterial;
                         gravityObject = _selectedObject.GetComponent<AdaptGravity>();
@@ -92,6 +91,7 @@ public class SelectionManager : MonoBehaviour
                 _selecMode = SelecMode.NonSelecting;
                 gravityObject.Selected = false;
                 gravityObject.AdaptChanges();
+                return;
             }
             
             // 마우스 휠 스크롤에 따른 중력 & UI 조정
@@ -118,7 +118,7 @@ public class SelectionManager : MonoBehaviour
                 color.b -= 0.1f;
             }
 
-            if (gravityObject.AddedGravity == 0f)
+            if (gravityObject.tempAddedGravity == 0f)
             {
                 color = _defaultColor;
             }
