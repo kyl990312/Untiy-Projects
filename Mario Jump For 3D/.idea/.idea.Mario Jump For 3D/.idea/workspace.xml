@@ -22,23 +22,14 @@
     <list default="true" id="33da5835-36f9-4c7f-9e12-0632ee781904" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Mario Jump For 3D/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Mario Jump For 3D/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Mario Jump For 3D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Mario Jump For 3D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/Player/Player_Collider.unitypackage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Player Controll.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Player/Player/Model/H@Rig_foot_pivot.FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player/Player/Model/H@Rig_foot_pivot.FBX.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Player/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player/Player/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Player/Player/Scripts/GroundedChecker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player/Player/Scripts/GroundedChecker.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Player/Player/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player/Player/Scripts/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Player/Scripts/SelectionManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player/Player/Scripts/SelectionManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Player/Player/animations/H@Dash_Ver1_all.FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player/Player/animations/H@Dash_Ver1_all.FBX.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Player/Player/animations/H@Idle_foot_pivot.FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player/Player/animations/H@Idle_foot_pivot.FBX.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Player/Player/animations/H@Run_Left_25f.FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player/Player/animations/H@Run_Left_25f.FBX.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Player/Player/animations/H@Run_Ver2_all_25f.FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player/Player/animations/H@Run_Ver2_all_25f.FBX.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Player/Player/animations/H@Run_right_25f (2).FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player/Player/animations/H@Run_right_25f (2).FBX.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Player/animations/H@jump_foot_pivot.FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player/Player/animations/H@jump_foot_pivot.FBX.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Player/Player/animations/Player Controller.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player/Player/animations/Player Controller.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Player/Scene/Player Controll Sample Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player/Scene/Player Controll Sample Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/DynamicsManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/DynamicsManager.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,8 +64,9 @@
         <option value="$PROJECT_DIR$/Assets/Player/Player/Scripts/GroundedChecker.cs" />
         <option value="$PROJECT_DIR$/Assets/IdleAnimation.cs" />
         <option value="$PROJECT_DIR$/Assets/Player/Player/Scripts/IdleAnimation.cs" />
-        <option value="$PROJECT_DIR$/Assets/Player/Player/Scripts/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Player/Player/Scripts/SelectionManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Player/Player/Scripts/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Player/AdaptGravity.cs" />
       </list>
     </option>
   </component>
@@ -141,6 +133,7 @@
       <workItem from="1605882989419" duration="17718000" />
       <workItem from="1605954831190" duration="984000" />
       <workItem from="1605961936355" duration="17610000" />
+      <workItem from="1606144262776" duration="8350000" />
     </task>
     <servers />
   </component>
@@ -178,10 +171,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1600950422609" />
-    <state x="539" y="183" width="840" height="856" key="search.everywhere.popup" timestamp="1604474637521">
+    <state x="539" y="183" width="840" height="856" key="search.everywhere.popup" timestamp="1606150000788">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="539" y="183" width="840" height="856" key="search.everywhere.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1604474637521" />
+    <state x="539" y="183" width="840" height="856" key="search.everywhere.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1606150000788" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1600705686748" />
   </component>
 </project>

@@ -82,9 +82,9 @@ public class AdaptGravity : MonoBehaviour
       }
 
       if(axis<0)
-         _tempAddedGravity += _rigidbody.mass * power;
+         _tempAddedGravity += power/_rigidbody.mass;
       else if (axis > 0)
-         _tempAddedGravity -= _rigidbody.mass * power;
+         _tempAddedGravity -= power / _rigidbody.mass * power;
 
       _prevAxis = axis;
    }

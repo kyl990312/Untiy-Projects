@@ -138,12 +138,9 @@ namespace Player.Scripts
             // Select
             if (Input.GetButtonDown("Right Click"))
             {
-                if (_state == PlayerState.Idle)
-                {
-                    _animator.SetTrigger(_hashSkillStart);
-                    _selectMode = true;
-                    _state = PlayerState.Skill;
-                }
+                _animator.SetTrigger(_hashSkillStart);
+                _selectMode = true;
+                _state = PlayerState.Skill;
             }
 
 
