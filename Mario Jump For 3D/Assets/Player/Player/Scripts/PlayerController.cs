@@ -262,16 +262,18 @@ namespace Player.Scripts
             transform.Rotate(Vector3.up* (rot*Time.deltaTime*sensitivityX));
 
             var camY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivityY;
-            if (_state == PlayerState.Skill)
-            {
-                firstCamLooAt.position = new Vector3(thirdCamFollow.position.x, Mathf.Clamp(firstCamLooAt.position.y + camY,
-                    transform.position.y - minY + 1.85f, transform.position.y + maxY + 1.85f), firstCamLooAt.position.z);
-            }
-            else
-            {
+
+                firstCamLooAt.position = new Vector3(firstCamLooAt.position.x, firstCamLooAt.position.y + camY * 0.8f, firstCamLooAt.position.z);
+
                 thirdCamFollow.position = new Vector3(thirdCamFollow.position.x, Mathf.Clamp(thirdCamFollow.position.y - camY,
-                    transform.position.y - minY + 1.85f, transform.position.y + maxY + 1.85f), thirdCamFollow.position.z);
-            }
+                    transform.position.y - minY , transform.position.y + maxY ), thirdCamFollow.position.z);
+
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(transform.position, 0.1f);
         }
     }
 }

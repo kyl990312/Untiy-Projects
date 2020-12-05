@@ -17,6 +17,7 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] private Material selectedMaterial;
     [SerializeField] private Material highlightMaterial;
     [SerializeField] private Material defaultSelectedMaterial;
+    [SerializeField] private Canvas canvas;
 
     RaycastHit hit;
     private Transform _selection;
@@ -32,7 +33,7 @@ public class SelectionManager : MonoBehaviour
     {
         _defaultColor = defaultSelectedMaterial.GetColor("_EmissionColor");
         selectedMaterial.SetColor("_EmissionColor",_defaultColor);
-
+        canvas.enabled = false;
     }
 
     private void Update()
@@ -46,16 +47,18 @@ public class SelectionManager : MonoBehaviour
 
         if (_selecMode == SelecMode.NonSelecting)
         {
-            
+            canvas.enabled = false;
             if (player.SelectMode)
                 _selecMode = SelecMode.Selecting;
 
         }
         else if (_selecMode == SelecMode.Selecting)
         {
+            canvas.enabled = true ;
             if (!player.SelectMode)
                 _selecMode = SelecMode.NonSelecting;
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 ScreenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
+            var ray = Camera.main.ScreenPointToRay(ScreenCenter);
             if (Physics.Raycast(ray, out hit))
             {
                 var selection = hit.transform;
@@ -84,6 +87,7 @@ public class SelectionManager : MonoBehaviour
 
         }else if (_selecMode == SelecMode.Selected)
         {
+            canvas.enabled = false;
             if (Input.GetButtonDown("Left Click"))
             {
                 _selectedObject.GetComponent<Renderer>().material = defaultMaterial;
@@ -125,7 +129,4 @@ public class SelectionManager : MonoBehaviour
             selectedMaterial.SetColor("_EmissionColor",color);
         }
     }
-
-
-
 }
