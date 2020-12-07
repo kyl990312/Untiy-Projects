@@ -14,10 +14,13 @@ public class SelectionManager : MonoBehaviour
 
     // NPC
     [SerializeField] private string npcTag = "NPC";
+    [SerializeField] private float npcRange;
 
     // Graivity
     [SerializeField] private string gravityObjTag = "Selectable";
+    [SerializeField] private float gravityRange;
     private AdaptGravity gravityObject;
+
 
     // UI
     private Material defaultMaterial;
@@ -70,11 +73,11 @@ public class SelectionManager : MonoBehaviour
             
             Vector3 ScreenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
             var ray = Camera.main.ScreenPointToRay(ScreenCenter);
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit,layer))
             {
                 var selection = hit.transform;
                 var distance = (player.transform.position - selection.position).magnitude;
-                if (selection.CompareTag(gravityObjTag) && distance > 10f)
+                if (selection.CompareTag(gravityObjTag) && distance < gravityRange)
                 {
                     _selection = selection;
                     HighlightUI(_selection);
@@ -115,12 +118,12 @@ public class SelectionManager : MonoBehaviour
             Vector3 ScreenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
             // 스크린의 정중앙에 ray를 쏜다.
             var ray = Camera.main.ScreenPointToRay(ScreenCenter);
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit,layer))
             {
                 var selection = hit.transform;
                 var distance = (player.transform.position - selection.position).magnitude;
                 // 일정거리내에 오브젝트가 존재하고 raycast된 오브젝트가 NPC일때 UI를 적용한다.
-                if (distance <= 5.0f && selection.CompareTag(npcTag))
+                if (distance <= npcRange && selection.CompareTag(npcTag))
                 {
                     _selection = selection;
                     HighlightUI(_selection);

@@ -40,7 +40,6 @@ namespace Player.Scripts
         [SerializeField]private PlayerState _state = PlayerState.Idle;
 
        // rotate
-        private Vector2 _mouseInputVector;
         [SerializeField] private Transform thirdCamFollow;
         [SerializeField] private Transform firstCamLooAt;
         [SerializeField] private Transform conversLookAt;
@@ -48,14 +47,20 @@ namespace Player.Scripts
         [SerializeField] private float sensitivityX;
         [SerializeField] private float sensitivityY;
 
-        // Jump
-        private bool _isGrounded = false;
+        private Transform _default3rdCamFollow;
+        private Transform _default1stCamLookAt;
 
+        // Jump
+        private bool _isGrounded = true;
+        [SerializeField] private float mass;
+        private float _gravity = 9.8f;
+        private float _velocity;
+        
         // Dash
         
         // Skill
         private bool _selectMode;
-
+        
         // Conversation
         private Transform _npcTransform;
         public Transform npcTransform
@@ -65,7 +70,6 @@ namespace Player.Scripts
                 _npcTransform = value;
             }
         }
-
 
         public bool SelectMode
         {
@@ -80,17 +84,13 @@ namespace Player.Scripts
             }
         }
 
-        public bool IsGrounded
-        {
-            get => _isGrounded;
-            set => _isGrounded = value;
-        }
-
         void Awake()
         {
             _animator = GetComponent<Animator>();
             _characterController = GetComponent<CharacterController>();
             _rigidbody = GetComponent<Rigidbody>();
+            _default1stCamLookAt = firstCamLooAt;
+            _default3rdCamFollow = thirdCamFollow;
         }
 
         void OnEnable()
@@ -111,6 +111,10 @@ namespace Player.Scripts
 
         private void FixedUpdate()
         {
+            // Check Grounded
+            CheckGrounded();
+
+
             if(_state != PlayerState.Conversation)
                 Rotate();
 
@@ -119,6 +123,7 @@ namespace Player.Scripts
                 // Dead Animation
                 return;
             }
+            
 
             if (_state == PlayerState.Jump)
             {
@@ -146,7 +151,23 @@ namespace Player.Scripts
 
             }
             else if (_state == PlayerState.Conversation) { 
-                
+                 // 대화가 끝났는지 상태를 받는다.
+
+                 //if(대화가 끝났다면){
+                 //   _animator.SetTrigger(_hashConversationEnd);
+                 //   _state = PlayerState.Idle;
+                 //}
+            }
+            
+            
+            if (!_isGrounded && _state != PlayerState.Jump)
+            {
+                var acc = -_gravity * mass;
+                _velocity += acc * Time.deltaTime;
+                transform.position += Vector3.up * (_velocity * Time.deltaTime);
+            } else
+            {
+                _velocity = 0f;
             }
         }
 
@@ -158,17 +179,16 @@ namespace Player.Scripts
                 _animator.SetTrigger(_hashSkillStart);
                 _selectMode = true;
                 _state = PlayerState.Skill;
+                thirdCamFollow = _default3rdCamFollow;
             }
 
 
-            if (Input.GetButtonUp("Right Click"))
+            if (Input.GetButtonUp("Right Click") && _state == PlayerState.Skill)
             {
-                if (_state == PlayerState.Skill)
-                {
-                    _animator.SetTrigger(_hashSkillEnd);
-                    _selectMode = false;
-                    _state = PlayerState.Idle;
-                }
+                _animator.SetTrigger(_hashSkillEnd);
+                _selectMode = false;
+                _state = PlayerState.Idle;
+                firstCamLooAt = _default1stCamLookAt;
             }
 
 
@@ -178,10 +198,12 @@ namespace Player.Scripts
             // Jump
             if (Input.GetButtonDown("Jump"))
             {
-                _state = PlayerState.Jump;
-                Debug.Log("JUMP");
-                //if(_isGrounded)
+                if (_isGrounded)
+                {
+                    _state = PlayerState.Jump;
+                    _isGrounded = false;
                     _animator.SetTrigger(_hashJump);
+                }
             }
             
             // Dash
@@ -189,11 +211,10 @@ namespace Player.Scripts
             {
                 _state = PlayerState.Dash;
                 _rigidbody.useGravity = false;
-                Debug.Log("Dash");
                 _animator.SetTrigger(_hashDash);
                 if (_state != PlayerState.Dash)
                 {
-                   
+                    
                 }
             }                        
 
@@ -277,12 +298,15 @@ namespace Player.Scripts
             transform.Rotate(Vector3.up* (rot*Time.deltaTime*sensitivityX));
 
             var camY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivityY;
-
+            if (_state == PlayerState.Skill)
+            {
                 firstCamLooAt.position = new Vector3(firstCamLooAt.position.x, firstCamLooAt.position.y + camY * 0.8f, firstCamLooAt.position.z);
-
+            }
+            else
+            {
                 thirdCamFollow.position = new Vector3(thirdCamFollow.position.x, Mathf.Clamp(thirdCamFollow.position.y - camY,
-                    transform.position.y - minY , transform.position.y + maxY ), thirdCamFollow.position.z);
-
+                    transform.position.y - minY, transform.position.y + maxY), thirdCamFollow.position.z);
+            }
         }
 
         public void ConversationStart()
@@ -299,7 +323,41 @@ namespace Player.Scripts
             _state = PlayerState.Idle;
         }
 
+        private void OnCollisionStay(Collision other)
+        {
+            // gravity가 적용되어있는 물체 위에 있을경우
+            if (other.gameObject.CompareTag("Selectable"))
+            {
+                transform.parent = other.transform;
+                _isGrounded = true;
 
+            }
+        }
+
+        private void OnCollisionExit(Collision other)
+        {
+            // gravity가 적용되는 물체 위에서 내려온 경우
+            if (other.gameObject.CompareTag("Selectable"))
+            {
+                transform.parent = null;
+            }
+        }
+
+        void CheckGrounded()
+        {
+            RaycastHit hit;
+            Debug.DrawRay(transform.position, Vector3.down * 0.1f, Color.red);
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.1f))
+            {
+                if (hit.transform.gameObject.CompareTag("FLOOR"))
+                {
+                    _isGrounded = true;
+                    return;
+                }
+            }
+
+            _isGrounded = false;
+        }
     }
 }
 

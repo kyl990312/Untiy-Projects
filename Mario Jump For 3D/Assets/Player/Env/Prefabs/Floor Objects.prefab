@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9176838893181870134}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Floor Objects
   m_TagString: FLOOR
   m_Icon: {fileID: 0}
@@ -101,6 +101,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stairs
       objectReference: {fileID: 0}
+    - target: {fileID: 8967551926106754639, guid: 3ce825bcdf34695418ff0adfeb76d107, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ce825bcdf34695418ff0adfeb76d107, type: 3}
 --- !u!4 &9176838893462541513 stripped
@@ -118,6 +122,10 @@ PrefabInstance:
     - target: {fileID: 7219148391390634808, guid: 0e91cd95c325d0549b1debfc76e661e0, type: 3}
       propertyPath: m_Name
       value: Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 7219148391390634808, guid: 0e91cd95c325d0549b1debfc76e661e0, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7219148391390634812, guid: 0e91cd95c325d0549b1debfc76e661e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -237,6 +245,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stairs (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4712514433893687051, guid: 77f85cd6cc6b78f4cb6c6050ffd2679d, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77f85cd6cc6b78f4cb6c6050ffd2679d, type: 3}
 --- !u!4 &9176838894225859834 stripped
@@ -310,6 +322,10 @@ PrefabInstance:
     - target: {fileID: 17124484196514045, guid: 3c2468975a9a9ed47b616a7c3f850bc4, type: 3}
       propertyPath: m_Name
       value: Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 17124484196514045, guid: 3c2468975a9a9ed47b616a7c3f850bc4, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c2468975a9a9ed47b616a7c3f850bc4, type: 3}

@@ -17,7 +17,6 @@ namespace Player.Scripts
         private void OnCollisionEnter(Collision other)
         {
             Debug.Log("Grounded");
-            _player.IsGrounded = true;
         }
     }
 }

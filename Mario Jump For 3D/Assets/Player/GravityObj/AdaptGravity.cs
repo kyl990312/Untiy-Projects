@@ -16,36 +16,42 @@ public class AdaptGravity : MonoBehaviour
 
 
     private Color _defaultColor;
-   private float _prevAxis = 0f;
+    private float _prevAxis = 0f;
     
 
-   private float _sec;
-   public float maxSec = 15f;
+    private float _sec;
+    public float maxSec = 15f;
 
-   private float _velocity;
-   private float _defaultY;
-   private float _minY;
+    private float _velocity;
+
+    private float _defaultY;
+    private float _minY;
+    private float _maxY;
 
     private bool _selecting;
 
     // UI
     private Renderer _renderer;
     private Material _defaultMat;
-    private Material _selectingMat;
-    private Material _defaultSelectingMat;
 
     void Awake()
-   {
-      _rigidbody = GetComponent<Rigidbody>();
-      _defaultY = transform.position.y;
-      Transform[] transforms = GetComponentsInChildren<Transform>();
-      if (transforms[1] != null)
-      {
-         _minY = transforms[1].position.y;
-         Destroy(transforms[1].gameObject);
-      }
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+        _defaultY = transform.position.y;
+        Transform[] transforms = GetComponentsInChildren<Transform>();
+        if (transforms[1] != null)
+        {
+            _minY = transforms[1].position.y;
+            //Destroy(transforms[1].gameObject);
+        }
+
+        if(transforms[2] != null)
+        {
+            _maxY = transforms[2].position.y;
+            //Destroy(transforms[2].gameObject);
+        }
         _renderer = GetComponent<Renderer>();
-        if(_renderer == null)
+        if (_renderer == null)
         {
             Debug.LogError("Renderer Not Loaded!");
             return;
@@ -54,26 +60,29 @@ public class AdaptGravity : MonoBehaviour
     }
 
     void FixedUpdate()
-   {
+    {
         if (_selecting)
         {
             AddGravity();
         }
 
-         float acc = -(gravity + _addedGravity) * _rigidbody.mass;
-         _velocity += acc * Time.deltaTime;
+        float acc = -(gravity + _addedGravity) * _rigidbody.mass;
+        _velocity += acc * Time.deltaTime;
 
-         transform.position += Vector3.up * (_velocity * Time.deltaTime);
-         if (_minY >= transform.position.y)
-         {
+        transform.position += Vector3.up * (_velocity * Time.deltaTime);
+        if (_minY >= transform.position.y && _velocity <= 0f)
+        {
             transform.position = new Vector3(transform.position.x, _minY, transform.position.z);
-            if (_addedGravity > 0)
-               _addedGravity = 0;
             _velocity = 0;
-         }
+        }
+        else if (_maxY >= transform.position.y && _velocity >= 0)
+        {
+            transform.position = new Vector3(transform.position.x, _maxY, transform.position.z);
+            _velocity = 0;
+        }
 
         if (_addedGravity != 0f)
-         {
+        {
             _sec += Time.deltaTime;
             if (_sec >= maxSec)
             {
@@ -85,7 +94,7 @@ public class AdaptGravity : MonoBehaviour
         }
     }
 
-   private void AddGravity()
+    private void AddGravity()
    {
         // Input
         float axis = Input.GetAxis("Mouse ScrollWheel");
@@ -99,7 +108,7 @@ public class AdaptGravity : MonoBehaviour
         if (axis < 0)
             _tempAddedGravity += power / _rigidbody.mass;
         else if (axis > 0)
-            _tempAddedGravity -= power / _rigidbody.mass * power;
+            _tempAddedGravity -= power / _rigidbody.mass;
 
         _prevAxis = axis;
 
@@ -108,16 +117,16 @@ public class AdaptGravity : MonoBehaviour
         if (axis > 0)
         {
             // r -> b
-            color.r -= 0.01f * _rigidbody.mass;
-            color.g -= 0.01f * _rigidbody.mass;
-            color.b += 0.01f * _rigidbody.mass;
+            color.r -= 0.1f; 
+            color.g -= 0.1f;
+            color.b += 0.1f; 
         }
         else if (axis < 0)
         {
             // b -> r
-            color.r += 0.1f;
+            color.r += 0.1f; 
             color.g -= 0.1f;
-            color.b -= 0.1f;
+            color.b -= 0.1f; 
         }
 
         if (_tempAddedGravity == 0f)
@@ -125,6 +134,7 @@ public class AdaptGravity : MonoBehaviour
             color = _defaultColor;
         }
         _renderer.material.SetColor("_EmissionColor", color);
+        Debug.Log(color.r + " " +color.g + " " + color.b);
     }
 
     public void SelectObject(Material mat)
