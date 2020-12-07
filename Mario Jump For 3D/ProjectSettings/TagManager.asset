@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FLOOR
   - Selectable
+  - NPC
   layers:
   - Default
   - TransparentFX

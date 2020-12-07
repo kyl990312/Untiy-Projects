@@ -24,6 +24,8 @@ namespace Player.Scripts
         private readonly int _hashDash = Animator.StringToHash("Dash");
         private readonly int _hashSkillStart = Animator.StringToHash("SkillStart");
         private readonly int _hashSkillEnd = Animator.StringToHash("SkillEnd");
+        private readonly int _hashConversationStart = Animator.StringToHash("ConversationStart");
+        private readonly int _hashConversationEnd = Animator.StringToHash("ConversationEnd");
         
         
 
@@ -41,7 +43,7 @@ namespace Player.Scripts
         private Vector2 _mouseInputVector;
         [SerializeField] private Transform thirdCamFollow;
         [SerializeField] private Transform firstCamLooAt;
-        //[SerializeField] private Transform cameraLookat;
+        [SerializeField] private Transform conversLookAt;
         public float minY, maxY;
         [SerializeField] private float sensitivityX;
         [SerializeField] private float sensitivityY;
@@ -50,10 +52,20 @@ namespace Player.Scripts
         private bool _isGrounded = false;
 
         // Dash
-        private int _idleTag;
         
         // Skill
         private bool _selectMode;
+
+        // Conversation
+        private Transform _npcTransform;
+        public Transform npcTransform
+        {
+            set
+            {
+                _npcTransform = value;
+            }
+        }
+
 
         public bool SelectMode
         {
@@ -93,13 +105,15 @@ namespace Player.Scripts
 
         void Update()
         {
-            InputKey();
-            Rotate();
-            
+            if (_state != PlayerState.Conversation)
+                InputKey();            
         }
 
         private void FixedUpdate()
         {
+            if(_state != PlayerState.Conversation)
+                Rotate();
+
             if (_state == PlayerState.Dead)
             {
                 // Dead Animation
@@ -125,10 +139,13 @@ namespace Player.Scripts
             }
             else if (_state == PlayerState.Skill)
             {
-                
+
             }
             else if (_state == PlayerState.Idle)
             {
+
+            }
+            else if (_state == PlayerState.Conversation) { 
                 
             }
         }
@@ -239,11 +256,9 @@ namespace Player.Scripts
         {
             // animation selec
             var dir = (transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical")) * (Time.deltaTime * speed);
-            //var dir = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
             if (dir == Vector3.zero)
                 _state = PlayerState.Idle;
             _characterController.Move(dir);
-            //transform.Translate(dir * (speed * Time.deltaTime));
         }
 
         void Dash()
@@ -270,11 +285,21 @@ namespace Player.Scripts
 
         }
 
-        private void OnDrawGizmos()
+        public void ConversationStart()
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(transform.position, 0.1f);
+            _animator.SetTrigger(_hashConversationStart);
+            _state = PlayerState.Conversation;
+            conversLookAt.position = _npcTransform.position;
+            conversLookAt.rotation = _npcTransform.rotation;                        
         }
+
+        public void ConversationEnd()
+        {
+            _animator.SetTrigger(_hashConversationEnd);
+            _state = PlayerState.Idle;
+        }
+
+
     }
 }
 

@@ -54,11 +54,41 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629529544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 15.5, z: 0}
+  m_LocalPosition: {x: 0, y: 15.66, z: 0.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2690604917931301262}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1253105355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1253105356}
+  m_Layer: 9
+  m_Name: ConversLookAt
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1253105356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253105355}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2690604917931301262}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1690832387
 GameObject:
@@ -84,7 +114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690832387}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 8.39, z: 0}
+  m_LocalPosition: {x: 0, y: 8.48, z: -0.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2690604917931301262}
@@ -464,7 +494,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3.5
   _state: 0
-  cameraBody: {fileID: 0}
+  thirdCamFollow: {fileID: 0}
+  firstCamLooAt: {fileID: 0}
+  conversLookAt: {fileID: 0}
   minY: 0
   maxY: 0
   sensitivityX: 0
@@ -910,6 +942,7 @@ Transform:
   - {fileID: 1800660369}
   - {fileID: 629529545}
   - {fileID: 60323512}
+  - {fileID: 1253105356}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -964,8 +997,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5.55
   _state: 0
-  cameraBody: {fileID: 1690832388}
-  minY: 3
+  thirdCamFollow: {fileID: 1690832388}
+  firstCamLooAt: {fileID: 60323512}
+  conversLookAt: {fileID: 1253105356}
+  minY: 5
   maxY: 3
   sensitivityX: 90
   sensitivityY: 10

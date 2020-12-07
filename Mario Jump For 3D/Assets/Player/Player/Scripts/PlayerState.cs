@@ -12,7 +12,8 @@ namespace Player.Scripts
         Jump,
         Skill,
         Fall,
-        Dead
+        Dead,
+        Conversation
     }
 }
 
